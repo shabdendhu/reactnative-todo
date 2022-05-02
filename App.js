@@ -10,6 +10,7 @@ import {
   View,
   ScrollView,
   Image,
+  SafeAreaView,
 } from "react-native";
 import Task from "./components/Task";
 import "react-native-gesture-handler";
@@ -35,30 +36,18 @@ export default function App() {
       <Example />
       <View style={styles.taskWrapper}>
         <Text style={styles.sectionTitle}>Todays tasks</Text>
+        {/* <SafeAreaView> */}
         <ScrollView style={styles.items}>
           {taskList.map((e, i) => (
             <Task completetask={() => completetask(i)} text={e} key={e} />
           ))}
-          {taskList.length===0&&
-          <Image source={require('./assets/icon.png')} />
-          }
-          {/* <FlatList
-            data={taskList}
-            renderItem={({ item, index }) => (
-              <Task
-                completetask={() => completetask(index)}
-                text={item}
-                key={item}
-              />
-            )}
-            keyExtractor={(item, index) => index.toString()}
-          /> */}
-          {/* {taskList.map((e, i) => (
-            <Task index={i} completetask={()=>completetask(i)} text={e} key={i} />
-          ))} */}
+          {taskList.length === 0 && (
+            <View style={styles.emptyTaskListWrapper}>
+              <Text style={styles.emptyTaskList}>ADD TASKS</Text>
+            </View>
+          )}
         </ScrollView>
-
-
+        {/* </SafeAreaView> */}
       </View>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -130,5 +119,19 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "bold",
     color: "green",
+  },
+  image: {
+    height: 100,
+    width: 100,
+  },
+  emptyTaskList: {
+    color: "#FFF",
+    fontSize: 50,
+  },
+  emptyTaskListWrapper: {
+    // backgroundColor:'white',
+    alignItems: "center",
+    justifyContent: "center",
+    height: 500,
   },
 });
