@@ -18,12 +18,12 @@ import { FlatList } from "react-native-gesture-handler";
 import Example from "./components/calender";
 
 export default function App() {
-  const [task, settask] = useState();
+  const [task, settask] = useState('');
   const [taskList, settaskList] = useState([]);
   const handleAddTask = (e) => {
     Keyboard.dismiss();
     settaskList([...taskList, task]);
-    settask(null);
+    settask('');
   };
   const completetask = (index) => {
     let itemsCopy = [...taskList];
@@ -58,7 +58,7 @@ export default function App() {
           onChangeText={(e) => {
             settask(e);
           }}
-          style={styles.input}
+          style={{...styles.input,outline: 'none'}}
           placeholder={"Write a task"}
         />
         <TouchableOpacity onPress={handleAddTask}>
